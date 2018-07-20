@@ -50,3 +50,9 @@ or
 SELECT w.name, w.continent, w.population
 FROM world w
 WHERE 25000000 >=  ALL (SELECT y.population FROM world y WHERE continent = w.continent) order by w.name;
+
+--10. Some countries have populations more than three times that of any of their neighbours (in the same continent). Give the countries and continents.
+
+SELECT w.name, w.continent
+FROM world w
+WHERE w.population >  ALL (SELECT y.population*3 FROM world y WHERE continent = w.continent and y.name != w.name) order by w.name;
