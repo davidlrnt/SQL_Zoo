@@ -46,4 +46,7 @@ FROM world
 GROUP BY continent
 HAVING max(population) <= 25000000) AS x
 ON y.continent = x.continent
-
+or
+SELECT w.name, w.continent, w.population
+FROM world w
+WHERE 25000000 >=  ALL (SELECT y.population FROM world y WHERE continent = w.continent) order by w.name;
